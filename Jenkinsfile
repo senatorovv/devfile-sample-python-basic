@@ -36,7 +36,7 @@ pipeline {
 	stage('Change the deployment') {
 	  steps {
 		sh '''
-    		withEnv(['MY_NAME_IS=${BUILD_NUMBER']) {
+    		withEnv(['MY_NAME_IS=$BUILD_NUMBER']) {
 		yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic:$MY_NAME_IS"' -i base/deployment.yml
   }
 		'''
