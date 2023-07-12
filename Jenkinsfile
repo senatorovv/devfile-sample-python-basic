@@ -45,8 +45,9 @@ pipeline {
   		echo $myvar
   		echo ${BUILD_NUMBER}
   		git checkout main
-    withEnv(['MY_NAME_IS=Eric'])
+    withEnv(['MY_NAME_IS=Eric']) {
 		yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic:$MY_NAME_IS"' -i base/deployment.yml
+  }
   		git remote -v
     		git config --global user.email "vsenator@redhat.com"
   		git config --global user.name "Viktor"
