@@ -35,7 +35,9 @@ pipeline {
 	  steps {
 	    sh '''
 		git clone https://github.com/senatorovv/react-app-deployment.git
+  		ls -la
   		cd react-app-deployment
+                ls -la
 		git checkout main
 		yq eval '.spec.template.spec.containers[0].image = "test:1234567"' -i base/deployment.yaml
   		git add base/deployment.yaml
