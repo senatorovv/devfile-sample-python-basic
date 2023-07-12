@@ -33,6 +33,7 @@ pipeline {
 	
 	stage('Change the deployment') {
 	  steps {
+		withCredentials([gitUsernamePassword(credentialsId: 'github-secret', gitToolName: 'git-tool')]) {
 		sh '''
 	        git clone https://github.com/senatorovv/react-app-deployment.git
   		ls -la
@@ -51,5 +52,6 @@ pipeline {
 }
   }
 
+}
 }
 }
