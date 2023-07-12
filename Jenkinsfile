@@ -3,6 +3,7 @@ pipeline {
   environment {
     dockerimagename = "hybrid2k3/petclinic"
     dockerImage = ""
+    BUILD_NUMBER = "${env.BUILD_NUMBER}"
   }
 
   agent any
@@ -40,7 +41,7 @@ pipeline {
   		cd react-app-deployment
                 ls -la
 		git checkout main
-		yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic":${BUILD_NUMBER}' -i base/deployment.yml
+		yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic:${BUILD_NUMBER}"' -i base/deployment.yml
   		git remote -v
     		git config --global user.email "vsenator@redhat.com"
   		git config --global user.name "Viktor"
