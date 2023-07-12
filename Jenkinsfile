@@ -3,8 +3,6 @@ pipeline {
   environment {
     dockerimagename = "hybrid2k3/petclinic"
     dockerImage = ""
-    BUILD_NUMBER = "${env.BUILD_NUMBER}"
-    myvar = "hybrid2k3/petclinic:$BUILD_NUMER"
   }
 
   agent any
@@ -35,10 +33,22 @@ pipeline {
 	
 	stage('Change the deployment') {
 	  steps {
-    		withEnv(['MY_NAME_IS=$BUILD_NUMBER']) {
-		sh yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic:$MY_NAME_IS"' -i base/deployment.yml
-  }
-	}
+		sh '''
+	        git clone https://github.com/senatorovv/react-app-deployment.git
+  		ls -la
+  		cd react-app-deployment
+                ls -la
+		git checkout main
+		yq eval '.spec.template.spec.containers[0].image = "test:1234567"' -i base/deployment.yml
+  		git remote -v
+    		git config --global user.email "vsenator@redhat.com"
+  		git config --global user.name "Viktor"
+    		git branch -M main
+  		git add base/deployment.yml
+   		git commit -m 'Change image tag'
+                git push --set-upstream origin main
+		'''
+}
   }
 
 }
