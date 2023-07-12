@@ -36,24 +36,9 @@ pipeline {
 	stage('Change the deployment') {
 	  steps {
 		sh '''
-	        git clone https://github.com/senatorovv/react-app-deployment.git
-  		ls -la
-  		cd react-app-deployment
-                ls -la
-		echo $BUILD_NUMBER
-  		echo $myvar
-  		echo ${BUILD_NUMBER}
-  		git checkout main
-    withEnv(['MY_NAME_IS=${BUILD_NUMBER']) {
+    		withEnv(['MY_NAME_IS=${BUILD_NUMBER']) {
 		yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic:$MY_NAME_IS"' -i base/deployment.yml
-  		git remote -v
-    		git config --global user.email "vsenator@redhat.com"
-  		git config --global user.name "Viktor"
-    		git branch -M main
-  		git add base/deployment.yml
-   		git commit -m 'Change image tag'
-                git push --set-upstream origin main
-		rm -rf react-app-deployment
+  }
 		'''
 }
   }
