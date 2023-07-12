@@ -49,7 +49,7 @@ pipeline {
     		git branch -M main
   		git add base/deployment.yml
    		git commit -m 'Change image tag'
-                git push https://hybrid2k3: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@github.com/senatorovv/react-app-deployment.git
+                git push https://$Username:$Password@github.com/senatorovv/react-app-deployment.git
 		'''
 }
   }
