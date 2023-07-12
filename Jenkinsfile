@@ -32,6 +32,9 @@ pipeline {
 	
 	
 	stage('Change the deployment') {
+	  environment {
+            NUMBER = "hybrid2k3/petclinic:${BUILD_NUMBER}"
+      }
 	  steps {
 		withCredentials([gitUsernamePassword(credentialsId: 'github-secret', gitToolName: 'git-tool')]) {
 		sh '''
@@ -39,8 +42,9 @@ pipeline {
   		ls -la
   		cd react-app-deployment
                 ls -la
+		echo $NUMBER
 		git checkout main
-		yq eval '.spec.template.spec.containers[0].image = env(dockerimagename)' -i base/deployment.yml
+		yq eval '.spec.template.spec.containers[0].image = env(NUMBER)' -i base/deployment.yml
   		git remote -v
     		git config --global user.email "vsenator@redhat.com"
   		git config --global user.name "Viktor"
