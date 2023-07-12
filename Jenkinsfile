@@ -41,6 +41,8 @@ pipeline {
 		git checkout main
 		yq eval '.spec.template.spec.containers[0].image = "test:1234567"' -i base/deployment.yml
   		git remote -v
+    		git config --global user.email "vsenator@redhat.com"
+  		git config --global user.name "Viktor"
     		git branch -M main
   		git add base/deployment.yml
    		git commit -m 'Change image tag'
