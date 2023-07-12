@@ -32,8 +32,6 @@ pipeline {
 	
 	
 	stage('Change the deployment') {
-	environment {
-        GIT_CREDS = credentials('github-secret')
 	  steps {
 	    sh '''
 		git clone https://github.com/senatorovv/react-app-deployment.git
