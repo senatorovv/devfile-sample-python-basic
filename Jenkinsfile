@@ -37,6 +37,13 @@ pipeline {
 		git clone https://github.com/senatorovv/react-app-deployment.git
   
   		wget https://github.com/mikefarah/yq/releases/download/v4.9.6/yq_linux_amd64.tar.gz
+                tar xvf yq_linux_amd64.tar.gz
+		mv yq_linux_amd64 /usr/bin/yq
+		rm yq_linux_amd64.tar.gz
+  		cd react-app-deployment
+		git checkout main
+		yq eval '.spec.template.spec.containers[0].image = "test:1234567"' -i react-app-deployment/base/deployment.yaml
+   		ls -la
                 rm -rf react-app-deployment
 	    '''
 
