@@ -46,10 +46,13 @@ pipeline {
     		git branch -M main
   		git add base/deployment.yml
    		git commit -m 'Change image tag'
-     		git push --set-upstream origin main
-                rm -rf react-app-deployment
-	    '''
 
+	    '''
+	withCredentials([usernamePassword(credentialsId: 'github-secret',
+                 usernameVariable: 'Username',
+                 passwordVariable: 'Password')]){
+    sh("git push http://$Username:$Password@git@github.com:senatorovv/react-app-deployment.git")
+}
   }
 
 }
