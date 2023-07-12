@@ -40,7 +40,9 @@ pipeline {
   		ls -la
   		cd react-app-deployment
                 ls -la
-		git checkout main
+		echo $BUILD_NUMBER
+  		echo ${BUILD_NUMBER}
+  		git checkout main
 		yq eval '.spec.template.spec.containers[0].image = "hybrid2k3/petclinic:$BUILD_NUMER"' -i base/deployment.yml
   		git remote -v
     		git config --global user.email "vsenator@redhat.com"
