@@ -40,9 +40,11 @@ pipeline {
                 ls -la
 		git checkout main
 		yq eval '.spec.template.spec.containers[0].image = "test:1234567"' -i base/deployment.yml
-  		git add base/deployment.yaml
+  		git remote -v
+    		git branch -M main
+  		git add base/deployment.yml
    		git commit -m 'Change image tag'
-     		git push
+     		git push --set-upstream origin main
                 rm -rf react-app-deployment
 	    '''
 
