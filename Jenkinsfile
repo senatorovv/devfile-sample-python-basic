@@ -33,9 +33,6 @@ pipeline {
 	
 	stage('Change the deployment') {
 	  steps {
-	withCredentials([usernamePassword(credentialsId: 'github-secret',
-                 usernameVariable: 'Username',
-                 passwordVariable: 'Password')]){
 		sh '''
 	        git clone https://github.com/senatorovv/react-app-deployment.git
   		ls -la
@@ -49,7 +46,7 @@ pipeline {
     		git branch -M main
   		git add base/deployment.yml
    		git commit -m 'Change image tag'
-                git push https://$Username:$Password@github.com/senatorovv/react-app-deployment.git
+                git push --set-upstream origin main
 		'''
 }
   }
