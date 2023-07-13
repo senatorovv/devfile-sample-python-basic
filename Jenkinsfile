@@ -52,6 +52,7 @@ pipeline {
   		git add base/deployment.yml
    		git commit -m 'Change image tag'
                 git push --set-upstream origin main
+		cd .. && rm -rf react-app-deployment
 		'''
 }
   }
