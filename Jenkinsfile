@@ -44,7 +44,7 @@ pipeline {
                 ls -la
 		echo $NUMBER
 		git checkout main
-		yq eval '.spec.template.spec.containers[0].image = env(NUMBER)' -i base/deployment.yml
+		yq eval '.spec.template.spec.containers[0].image = env(NUMBER)' -i overlays/dev/deployment.yml
   		git remote -v
     		git config --global user.email "vsenator@redhat.com"
   		git config --global user.name "Viktor"
