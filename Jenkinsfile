@@ -49,7 +49,7 @@ pipeline {
     		git config --global user.email "vsenator@redhat.com"
   		git config --global user.name "Viktor"
     		git branch -M main
-  		git add base/deployment.yml
+  		git add overlays/dev/deployment.yml
    		git commit -m 'Change image tag'
                 git push --set-upstream origin main
 		cd .. && rm -rf react-app-deployment
